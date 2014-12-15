@@ -49,7 +49,7 @@ public class Alarm
 
     public void stop()
     {
-        if(clip.isActive())
+        if(clip != null && clip.isActive())
         {
             clip.stop();
             clip = null;
