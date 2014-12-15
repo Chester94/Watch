@@ -1,0 +1,70 @@
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.8.0_25" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp watchPanel::l::544:x}"
+			"$verticalGroup": "par l {comp watchPanel::l::541:x}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "com.company.WatchPanel" ) {
+				name: "watchPanel"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "watchPanelMouseClicked", true ) )
+			} )
+			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+				name: "menuBar"
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "mainMenu"
+					"text": "Настройки"
+					add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+						name: "handColorMenu"
+						"text": "Цвет стрелок"
+						add( new FormComponent( "javax.swing.JMenuItem" ) {
+							name: "hourHandColor"
+							"text": "Часовая"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "hourHandColorActionPerformed", true ) )
+						} )
+						add( new FormComponent( "javax.swing.JMenuItem" ) {
+							name: "minuteHandColor"
+							"text": "Минутная"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "minuteHandColorActionPerformed", true ) )
+						} )
+						add( new FormComponent( "javax.swing.JMenuItem" ) {
+							name: "secondHandColor"
+							"text": "Секундная"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "secondHandColorActionPerformed", true ) )
+						} )
+					} )
+					add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+						name: "digitMenu"
+						"text": "Настройка цифр"
+						add( new FormComponent( "javax.swing.JMenuItem" ) {
+							name: "colorTextMenu"
+							"text": "Цвет"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "colorTextMenuActionPerformed", true ) )
+						} )
+						add( new FormComponent( "javax.swing.JMenuItem" ) {
+							name: "fontMenu"
+							"text": "Шрифт"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "fontMenuActionPerformed", true ) )
+						} )
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "alarmClockMenu"
+					"text": "Будильник"
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "setAlarmClockMenu"
+						"text": "Установить будильник"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "setAlarmClockMenuActionPerformed", true ) )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "setAlarmClockMenuActionPerformed2", true ) )
+					} )
+				} )
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 560, 600 )
+		} )
+	}
+}

@@ -1,0 +1,53 @@
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.8.0_25" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {space :::p, par l {seq {comp addButton:::p:100:p, space ::52:x, comp changeButton:::p:100:p, space :p:36:p, comp deleteButton:::p:100:p}, seq t {comp pathTextField:::::x, space :::p, comp chooseFileButton:::p::p}, seq l {comp hourComboBox:::p:75:p, space :::p, comp minuteComboBox:::p:75:p, space :::p, comp secondComboBox:::p:75:p, space u:::p, comp allAlarmsComboBox:::p:126:p, space :0:13:x}}, space :0:0:p}}"
+			"$verticalGroup": "par l {seq l {space :::p, par l {comp hourComboBox:::p::p, comp minuteComboBox::l:p::p, comp secondComboBox::l:p::p, comp allAlarmsComboBox::l:p::p}, space :::p, par b {comp pathTextField::b:p::p, comp chooseFileButton::b:p::p}, space :::p, par b {comp addButton::b:p::p, comp deleteButton::b:p::p, comp changeButton::b:p::p}, space ::11:x}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "hourComboBox"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "minuteComboBox"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "secondComboBox"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "allAlarmsComboBox"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "allAlarmsComboBoxActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "chooseFileButton"
+				"text": "Выбор файла"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "chooseFileButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "pathTextField"
+				"editable": false
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "addButton"
+				"text": "Добавить"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "changeButton"
+				"text": "Изменить"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "changeButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "deleteButton"
+				"text": "Удалить"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "deleteButtonActionPerformed", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 410, 155 )
+		} )
+	}
+}

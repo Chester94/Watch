@@ -1,0 +1,15 @@
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.8.0_25" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			"border": new javax.swing.border.LineBorder( sfield java.awt.Color black, 1, false )
+			"background": sfield java.awt.Color magenta
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}
