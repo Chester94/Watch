@@ -21,13 +21,15 @@ public class WatchPanel extends JPanel
 
     private Font textFont = new Font( "Starcraft", Font.ITALIC, 36 );
 
-    Graphics graphContext;
+    private Graphics graphContext;
 
     private final int maxClockLength = 180;
     private final int gradeInSegmentSecond = 6;
     private final int gradeInSegmentMinute = 6;
     private final int gradeInSegmentHour = 30;
     private final double gradeInSegmentMilliSecond = 6./1000;
+
+    private final double pi = Math.PI;
 
     public WatchPanel()
     {
@@ -114,8 +116,6 @@ public class WatchPanel extends JPanel
         graphContext.setColor( getBackground() );
         graphContext.fillOval( -maxClockLength - 5, -maxClockLength - 5,
                 maxClockLength*2 + 10, maxClockLength*2 + 10);
-        //graphContext.fillRect( -width/2 + 10, -height/2 - 10, width - 10, height );
-        //graphContext.clearRect( -width/2 + 10, -height / 2 - 10, width - 10, height );
 
         drawHand( curTime.getHour() * gradeInSegmentHour + curTime.getMinute() * gradeInSegmentHour / 60.,
                 50, 140, 25, hourHandColor, borderHandColor );
@@ -129,13 +129,11 @@ public class WatchPanel extends JPanel
                           Color inside, Color border)
     {
         grade -= 90;
-        /*Graphics graphContext = this.getGraphics();
-        graphContext.translate( width/2, height/2 );*/
 
-        double radianPoint1 = grade * Math.PI/180;
-        double radianPoint2 = (grade+90) * Math.PI/180;
-        double radianPoint3 = (grade + 180) * Math.PI/180;
-        double radianPoint4 = (grade-90) * Math.PI/180;
+        double radianPoint1 = grade * pi/180;
+        double radianPoint2 = (grade+90) * pi/180;
+        double radianPoint3 = (grade + 180) * pi/180;
+        double radianPoint4 = (grade-90) * pi/180;
 
         int x1 = (int)(Math.cos( radianPoint1 )*heightUpHand);
         int y1 = (int)(Math.sin( radianPoint1 )*heightUpHand);
@@ -166,7 +164,7 @@ public class WatchPanel extends JPanel
 
         for( int i = 1; i <= 12; i++ )
         {
-            radian = ( -90 + gradeInSegmentHour * i ) * Math.PI/180;
+            radian = ( -90 + gradeInSegmentHour * i ) * pi/180;
             x = (int)(Math.cos( radian ) * 230) - 15;
             y = (int)(Math.sin( radian ) * 230) + 10;
 

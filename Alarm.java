@@ -24,8 +24,7 @@ public class Alarm
         {
             AudioInputStream ais;
 
-            System.out.println( path );
-            if(path == null || path.isEmpty())
+            if(path == null || path.isEmpty() || path.equals( "[default music]" ))
                 ais = AudioSystem.getAudioInputStream( Main.class.getResource( "/resources/tmp.wav" ) );
             else
             {

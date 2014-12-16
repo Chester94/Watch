@@ -13,6 +13,7 @@ public class AlarmArray
 
     public void change(int index, Alarm newAlarm)
     {
+        alarms.get( index ).stop();
         alarms.remove( index );
         alarms.add( index, newAlarm );
     }

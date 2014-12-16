@@ -40,10 +40,10 @@ public class MainWindow extends JFrame
             @Override
             public void run()
             {
-                watchPanel.redrawWatch( new Time(GregorianCalendar.getInstance().get( Calendar.HOUR_OF_DAY ),
+                watchPanel.redrawWatch( new Time( GregorianCalendar.getInstance().get( Calendar.HOUR_OF_DAY ),
                         GregorianCalendar.getInstance().get( Calendar.MINUTE ),
                         GregorianCalendar.getInstance().get( Calendar.SECOND ),
-                        GregorianCalendar.getInstance().get( Calendar.MILLISECOND )) );
+                        GregorianCalendar.getInstance().get( Calendar.MILLISECOND ) ) );
             }
         }, 0, 25 );
 
@@ -52,9 +52,9 @@ public class MainWindow extends JFrame
             @Override
             public void run()
             {
-                checkAlarmTime( new Time(GregorianCalendar.getInstance().get( Calendar.HOUR_OF_DAY ),
+                checkAlarmTime( new Time( GregorianCalendar.getInstance().get( Calendar.HOUR_OF_DAY ),
                         GregorianCalendar.getInstance().get( Calendar.MINUTE ),
-                        GregorianCalendar.getInstance().get( Calendar.SECOND ), 0) );
+                        GregorianCalendar.getInstance().get( Calendar.SECOND ), 0 ) );
             }
         }, 0, 1000 );
     }
@@ -84,7 +84,7 @@ public class MainWindow extends JFrame
     {
         watchPanel.setTextColor(
                 JColorChooser.showDialog( this, "Выбор цвета для текста",
-                        watchPanel.getTextColor()) );
+                        watchPanel.getTextColor() ) );
     }
 
     private void fontMenuActionPerformed(ActionEvent e)
@@ -97,7 +97,10 @@ public class MainWindow extends JFrame
     private void setAlarmClockMenuActionPerformed(ActionEvent e)
     {
         AlarmTimeControlDialog a = new AlarmTimeControlDialog( this );
-        a.showDialog( alarms );
+        a.showDialog( alarms,
+                new Time( GregorianCalendar.getInstance().get( Calendar.HOUR_OF_DAY ),
+                        GregorianCalendar.getInstance().get( Calendar.MINUTE ),
+                        GregorianCalendar.getInstance().get( Calendar.SECOND ), 0 ) );
     }
 
     private void checkAlarmTime(Time curTime)
@@ -209,7 +212,7 @@ public class MainWindow extends JFrame
                 setAlarmClockMenu.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        setAlarmClockMenuActionPerformed(e);
+                        setAlarmClockMenuActionPerformed( e );
                     }
                 });
                 alarmClockMenu.add(setAlarmClockMenu);

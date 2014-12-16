@@ -29,36 +29,29 @@ public class AlarmTimeControlDialog extends JDialog
         this.alarms = alarms;
     }
 
-    public void showDialog( AlarmArray alarms )
+    public void showDialog( AlarmArray alarms, Time curTime )
     {
         setAlarms( alarms );
 
-        String[] hour = new String[24];
-        for( int i = 0; i < 24; i++ )
-            hour[i] = String.valueOf( i );
+        setComboBox( hourComboBox, 24, curTime.getHour() );
+        setComboBox( minuteComboBox, 60, curTime.getMinute() );
+        setComboBox( secondComboBox, 60, curTime.getSecond() );
 
-        hourComboBox.setModel( new DefaultComboBoxModel( hour ) );
-        hourComboBox.setSelectedIndex( 9 );
-
-        String[] minute = new String[60];
-        for( int i = 0; i < 60; i++ )
-            minute[i] = String.valueOf( i );
-
-        minuteComboBox.setModel( new DefaultComboBoxModel( minute ) );
-        minuteComboBox.setSelectedIndex( 0 );
-
-        String[] second = new String[60];
-        for( int i = 0; i < 60; i++ )
-            second[i] = String.valueOf( i );
-
-        secondComboBox.setModel( new DefaultComboBoxModel( second ) );
-        secondComboBox.setSelectedIndex( 0 );
-
-        pathTextField.setText( "" );
+        pathTextField.setText( "[default music]" );
 
         setAllAlarmsComboBox();
 
         setVisible( true );
+    }
+
+    private void setComboBox(JComboBox comboBox, int value, int curPosition)
+    {
+        String[] model = new String[value];
+        for( int i = 0; i < value; i++ )
+            model[i] = String.valueOf( i );
+
+        comboBox.setModel( new DefaultComboBoxModel( model ) );
+        comboBox.setSelectedIndex( curPosition );
     }
 
     private void setAllAlarmsComboBox()
@@ -119,7 +112,7 @@ public class AlarmTimeControlDialog extends JDialog
         if(chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
             pathTextField.setText(chooser.getSelectedFile().getPath());
         else
-            pathTextField.setText( "" );
+            pathTextField.setText( "[default music]" );
     }
 
     private void initComponents() {
