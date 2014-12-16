@@ -181,7 +181,7 @@ public class WatchPanel extends JPanel
 
         //======== this ========
         setBorder(LineBorder.createBlackLineBorder());
-        setBackground(Color.magenta);
+        setBackground(new Color(255, 102, 255));
         setLayout(null);
 
         { // compute preferred size

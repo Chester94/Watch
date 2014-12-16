@@ -6,7 +6,7 @@ new FormModel {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 			name: "this"
 			"border": new javax.swing.border.LineBorder( sfield java.awt.Color black, 1, false )
-			"background": sfield java.awt.Color magenta
+			"background": new java.awt.Color( 255, 102, 255, 255 )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
 			"size": new java.awt.Dimension( 400, 300 )

@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Mon Dec 15 18:47:42 MSK 2014
- */
-
 package com.company;
 
 import java.awt.*;

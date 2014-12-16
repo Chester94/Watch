@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Thu Dec 11 17:43:14 MSK 2014
- */
-
 package com.company;
 
 import com.ozten.font.JFontChooser;
@@ -23,15 +19,18 @@ public class MainWindow extends JFrame
     {
         super( "Часы" );
         initComponents();
+        setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
+
         watchPanel.countScale();
         watchPanel.setGraphContext();
+    }
 
-        setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
+    public void showWindow()
+    {
+        setTimers();
 
         setResizable( false );
         setVisible( true );
-
-        setTimers();
     }
 
     private void setTimers()
