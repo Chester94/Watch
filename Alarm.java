@@ -29,7 +29,6 @@ public class Alarm
                 ais = AudioSystem.getAudioInputStream( Main.class.getResource( "/resources/tmp.wav" ) );
             else
             {
-                System.out.println( "****************************" );
                 File soundFile = new File(path);
                 ais = AudioSystem.getAudioInputStream(soundFile);
             }

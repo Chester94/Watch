@@ -57,7 +57,7 @@ public class MainWindow extends JFrame
                         GregorianCalendar.getInstance().get( Calendar.MINUTE ),
                         GregorianCalendar.getInstance().get( Calendar.SECOND ), 0) );
             }
-        }, 0, 995 );
+        }, 0, 1000 );
     }
 
     private void hourHandColorActionPerformed(ActionEvent e)
@@ -97,21 +97,6 @@ public class MainWindow extends JFrame
 
     private void setAlarmClockMenuActionPerformed(ActionEvent e)
     {
-        /*JFileChooser chooser = new JFileChooser();
-
-
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("WAV files", "wav");
-        chooser.setFileFilter(filter);
-
-        if(chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
-            path = chooser.getSelectedFile().getPath();*/
-
-        /*String path = null;
-
-        alarms.add( new Alarm( new Time(GregorianCalendar.getInstance().get( Calendar.HOUR ),
-                GregorianCalendar.getInstance().get( Calendar.MINUTE ),
-                GregorianCalendar.getInstance().get( Calendar.SECOND ) + 2, 0), path) );*/
-
         AlarmTimeControlDialog a = new AlarmTimeControlDialog( this );
         a.showDialog( alarms );
     }
