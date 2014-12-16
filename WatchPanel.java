@@ -10,9 +10,6 @@ import javax.swing.border.*;
 
 public class WatchPanel extends JPanel
 {
-    private int width;
-    private int height;
-
     private Color textColor = Color.WHITE;
     private Color hourHandColor = Color.WHITE;
     private Color minuteHandColor = Color.WHITE;
@@ -28,8 +25,6 @@ public class WatchPanel extends JPanel
     private final int gradeInSegmentMinute = 6;
     private final int gradeInSegmentHour = 30;
     private final double gradeInSegmentMilliSecond = 6./1000;
-
-    private final double pi = Math.PI;
 
     public WatchPanel()
     {
@@ -93,16 +88,10 @@ public class WatchPanel extends JPanel
         return textColor;
     }
 
-    public void countScale()
-    {
-        width = this.getSize().width;
-        height = this.getSize().height;
-    }
-
     public void setGraphContext()
     {
         graphContext = this.getGraphics();
-        graphContext.translate( width/2, height/2 );
+        graphContext.translate( this.getSize().width / 2, this.getSize().height / 2 );
     }
 
     public void redrawWatch(Time curTime)
@@ -130,10 +119,10 @@ public class WatchPanel extends JPanel
     {
         grade -= 90;
 
-        double radianPoint1 = grade * pi/180;
-        double radianPoint2 = (grade+90) * pi/180;
-        double radianPoint3 = (grade + 180) * pi/180;
-        double radianPoint4 = (grade-90) * pi/180;
+        double radianPoint1 = grade * Math.PI/180;
+        double radianPoint2 = (grade+90) * Math.PI/180;
+        double radianPoint3 = (grade + 180) * Math.PI/180;
+        double radianPoint4 = (grade-90) * Math.PI/180;
 
         int x1 = (int)(Math.cos( radianPoint1 )*heightUpHand);
         int y1 = (int)(Math.sin( radianPoint1 )*heightUpHand);
@@ -157,18 +146,35 @@ public class WatchPanel extends JPanel
     private void redrawDial(Color color)
     {
         double radian;
-        int x, y;
+        double x, y;
+
+        final int OFFSET_X = -15;
+        final int OFFSET_Y = 10;
 
         graphContext.setColor( color );
         graphContext.setFont( textFont );
 
-        for( int i = 1; i <= 12; i++ )
+        /*for( int i = 1; i <= 12; i++ )
         {
             radian = ( -90 + gradeInSegmentHour * i ) * pi/180;
             x = (int)(Math.cos( radian ) * 230) - 15;
             y = (int)(Math.sin( radian ) * 230) + 10;
 
             graphContext.drawString( Integer.toString( i ), x, y);
+        }*/
+
+        for( int i = 1; i <= 60 ; i++ )
+        {
+            radian = ( -90 + gradeInSegmentMinute * i ) * Math.PI/180;
+
+            x = Math.cos( radian );
+            y = Math.sin( radian );
+
+            if( i % 5 == 0 )
+                graphContext.drawString( Integer.toString( i / 5 ),
+                        (int)(x*230 + OFFSET_X), (int)(y*230 + OFFSET_Y) );
+
+            graphContext.fillOval( (int)(x*200 - 2), (int)(y*200 - 2), 4, 4 );
         }
     }
 

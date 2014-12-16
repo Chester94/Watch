@@ -21,7 +21,6 @@ public class MainWindow extends JFrame
         initComponents();
         setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
 
-        watchPanel.countScale();
         watchPanel.setGraphContext();
     }
 
