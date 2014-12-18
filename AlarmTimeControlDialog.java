@@ -6,31 +6,60 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * @author Frolov Daniil IVT-43BO.
+ * Dialog creation / modification / deletion of alarms.
+ * Holds a reference to an array of alarm clocks, work that carries.
+ */
 public class AlarmTimeControlDialog extends JDialog
 {
+    /**
+     * Array of alarms.
+     */
     private AlarmArray alarms;
 
+    /**
+     * Initializes the class.
+     * @param owner
+     */
     public AlarmTimeControlDialog(Frame owner)
     {
         super(owner);
         initComponents();
-        setResizable( false );
     }
 
+    /**
+     * Initializes the class.
+     * @param owner
+     */
     public AlarmTimeControlDialog(Dialog owner)
     {
         super(owner);
         initComponents();
-        setResizable( false );
     }
 
-    public void setAlarms( AlarmArray alarms )
+    /**
+     * Setter for alarms array.
+     * @param alarms
+     */
+    private void setAlarms( AlarmArray alarms )
     {
         this.alarms = alarms;
     }
 
+    /**
+     * Sets an array of alarms.
+     * Initializes the combo box.
+     * Initializes field select a music file.
+     * Disables the ability to resize the window.
+     * Enables the visibility of the window.
+     * @param alarms
+     * @param curTime
+     */
     public void showDialog( AlarmArray alarms, Time curTime )
     {
+        setResizable( false );
+
         setAlarms( alarms );
 
         setComboBox( hourComboBox, 24, curTime.getHour() );
@@ -44,6 +73,12 @@ public class AlarmTimeControlDialog extends JDialog
         setVisible( true );
     }
 
+    /**
+     * Installation of valid values for combo box.
+     * @param comboBox hour / minute / second combo box.
+     * @param value value ~ hour(24) / minute(60) / second(60)
+     * @param curPosition starting position for combo box
+     */
     private void setComboBox(JComboBox comboBox, int value, int curPosition)
     {
         String[] model = new String[value];
@@ -54,6 +89,9 @@ public class AlarmTimeControlDialog extends JDialog
         comboBox.setSelectedIndex( curPosition );
     }
 
+    /**
+     * Set combo box for to select alarm.
+     */
     private void setAllAlarmsComboBox()
     {
         allAlarmsComboBox.setModel( new DefaultComboBoxModel( alarms.getAllAlarmTime() ) );
@@ -61,6 +99,10 @@ public class AlarmTimeControlDialog extends JDialog
             allAlarmsComboBox.setSelectedIndex( allAlarmsComboBox.getItemCount() - 1 );
     }
 
+    /**
+     * Get alarm formed by the values of a dialog.
+     * @return alarm
+     */
     private Alarm getNewAlarm()
     {
         return new Alarm( new Time( hourComboBox.getSelectedIndex(),
@@ -69,6 +111,10 @@ public class AlarmTimeControlDialog extends JDialog
                 pathTextField.getText());
     }
 
+    /**
+     * State change event combo box to select alarm.
+     * @param e
+     */
     private void allAlarmsComboBoxActionPerformed(ActionEvent e)
     {
         Alarm tmp = alarms.getAlarm(((JComboBox) e.getSource()).getSelectedIndex());
@@ -84,24 +130,40 @@ public class AlarmTimeControlDialog extends JDialog
         pathTextField.setText( tmp.getPath() );
     }
 
+    /**
+     * Button event. Add new alarm.
+     * @param e
+     */
     private void addButtonActionPerformed(ActionEvent e)
     {
         alarms.add( getNewAlarm() );
         setAllAlarmsComboBox();
     }
 
+    /**
+     * Button event. Change alarm.
+     * @param e
+     */
     private void changeButtonActionPerformed(ActionEvent e)
     {
         alarms.change( allAlarmsComboBox.getSelectedIndex(), getNewAlarm() );
         setAllAlarmsComboBox();
     }
 
+    /**
+     * Button event. Delete alarm.
+     * @param e
+     */
     private void deleteButtonActionPerformed(ActionEvent e)
     {
         alarms.delete( allAlarmsComboBox.getSelectedIndex() );
         setAllAlarmsComboBox();
     }
 
+    /**
+     * Button event. Choose music file.
+     * @param e
+     */
     private void chooseFileButtonActionPerformed(ActionEvent e)
     {
         JFileChooser chooser = new JFileChooser();

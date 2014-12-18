@@ -4,10 +4,23 @@ import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * @author Frolov Daniil IVT-43BO.
+ * Stores the data necessary for the alarm.
+ */
 public class Alarm
 {
+    /**
+     * Music value
+     */
     Clip clip = null;
+    /**
+     * Alarm time
+     */
     Time callTime = null;
+    /**
+     * Path to music file
+     */
     String path = null;
 
     public Alarm( Time callTime, String path )
@@ -16,6 +29,9 @@ public class Alarm
         this.path = path;
     }
 
+    /**
+     * Start music play.
+     */
     public void play()
     {
         if(clip != null) return;
@@ -45,6 +61,9 @@ public class Alarm
         }
     }
 
+    /**
+     * Stop music play.
+     */
     public void stop()
     {
         if(clip != null && clip.isActive())
@@ -54,11 +73,19 @@ public class Alarm
         }
     }
 
+    /**
+     * Getter for path to music file.
+     * @return path to music path
+     */
     public String getPath()
     {
         return path;
     }
 
+    /**
+     * Getter for call tile.
+     * @return call time
+     */
     public Time callTime()
     {
         return callTime;

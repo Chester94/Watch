@@ -1,5 +1,9 @@
 package com.company;
 
+/**
+ * @author Frolov Daniil IVT-43BO.
+ * Stores time.
+ */
 public class Time
 {
     private int hour;
@@ -44,7 +48,7 @@ public class Time
         if(obj == null)
             return false;
 
-        if(!(getClass() == obj.getClass()))
+        if( !(obj instanceof Time) )
             return false;
 
         Time tmp = (Time)obj;

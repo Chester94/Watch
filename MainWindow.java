@@ -9,30 +9,59 @@ import javax.swing.GroupLayout;
 import java.util.*;
 import java.util.Timer;
 
+/**
+ * @author Frolov Daniil IVT-43BO.
+ * The main window of the application.
+ */
 public class MainWindow extends JFrame
 {
+    /**
+     * Timer to control the redrawing of the clock.
+     */
     private Timer timerWatch = new Timer();
+    /**
+     * Timer to control the alarm checks.
+     */
     private Timer timerAlarm = new Timer();
+    /**
+     * Array of existing alarms.
+     */
     private AlarmArray alarms = new AlarmArray();
 
+    /**
+     * Initializes the class.
+     * Set windows title = Watch 2.4.
+     * Initializes components of window.
+     * Sets the behavior when closing = EXIT_ON_CLOSE.
+     */
     public MainWindow()
     {
-        super( "Часы" );
+        super( "Watch 2.4" );
         initComponents();
         setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
 
         watchPanel.setGraphContext();
     }
 
+    /**
+     * Produces timer settings control redrawing and alarm clock.
+     * Disables the ability to resize the window.
+     * Enables the visibility of the window.
+     */
     public void showWindow()
     {
-        setTimers();
+        setTimers(25, 1000);
 
         setResizable( false );
         setVisible( true );
     }
 
-    private void setTimers()
+    /**
+     * Adjusts timer control redrawing hours and checking the alarm.
+     * @param timeoutRedrawWatch redraw watch every N milliseconds
+     * @param timeoutCheckAlarms check alarms every N milliseconds
+     */
+    private void setTimers(int timeoutRedrawWatch, int timeoutCheckAlarms)
     {
         timerWatch.scheduleAtFixedRate( new TimerTask()
         {
@@ -44,7 +73,7 @@ public class MainWindow extends JFrame
                         GregorianCalendar.getInstance().get( Calendar.SECOND ),
                         GregorianCalendar.getInstance().get( Calendar.MILLISECOND ) ) );
             }
-        }, 0, 25 );
+        }, 0, timeoutRedrawWatch );
 
         timerAlarm.scheduleAtFixedRate( new TimerTask()
         {
@@ -55,9 +84,14 @@ public class MainWindow extends JFrame
                         GregorianCalendar.getInstance().get( Calendar.MINUTE ),
                         GregorianCalendar.getInstance().get( Calendar.SECOND ), 0 ) );
             }
-        }, 0, 1000 );
+        }, 0, timeoutCheckAlarms );
     }
 
+    /**
+     * Handler menu.
+     * Dialog for choose color of hour hand.
+     * @param e
+     */
     private void hourHandColorActionPerformed(ActionEvent e)
     {
         watchPanel.setHourHandColor(
@@ -65,6 +99,11 @@ public class MainWindow extends JFrame
                         watchPanel.getHourHandColor() ) );
     }
 
+    /**
+     * Handler menu.
+     * Dialog for choose color of minute hand.
+     * @param e
+     */
     private void minuteHandColorActionPerformed(ActionEvent e)
     {
         watchPanel.setMinuteHandColor(
@@ -72,6 +111,11 @@ public class MainWindow extends JFrame
                         watchPanel.getMinuteHandColor() ) );
     }
 
+    /**
+     * Handler menu.
+     * Dialog for choose color of second hand.
+     * @param e
+     */
     private void secondHandColorActionPerformed(ActionEvent e)
     {
         watchPanel.setSecondHandColor(
@@ -79,6 +123,11 @@ public class MainWindow extends JFrame
                         watchPanel.getSecondHandColor() ) );
     }
 
+    /**
+     * Handler menu.
+     * Dialog for choose text color.
+     * @param e
+     */
     private void colorTextMenuActionPerformed(ActionEvent e)
     {
         watchPanel.setTextColor(
@@ -86,6 +135,11 @@ public class MainWindow extends JFrame
                         watchPanel.getTextColor() ) );
     }
 
+    /**
+     * Handler menu.
+     * Dialog for choose text font.
+     * @param e
+     */
     private void fontMenuActionPerformed(ActionEvent e)
     {
         watchPanel.setTextFont(
@@ -93,6 +147,12 @@ public class MainWindow extends JFrame
                         watchPanel.getTextFont() ) );
     }
 
+    /**
+     * Handler menu.
+     * Call the dialog creation / modification / deletion of alarms.
+     * Use field alarms.
+     * @param e
+     */
     private void setAlarmClockMenuActionPerformed(ActionEvent e)
     {
         AlarmTimeControlDialog a = new AlarmTimeControlDialog( this );
@@ -102,11 +162,21 @@ public class MainWindow extends JFrame
                         GregorianCalendar.getInstance().get( Calendar.SECOND ), 0 ) );
     }
 
+    /**
+     * Run all alarms installed at this time.
+     * Function for timer control.
+     * @param curTime current system time
+     */
     private void checkAlarmTime(Time curTime)
     {
         alarms.playAppropriateAlarm( curTime );
     }
 
+    /**
+     * Stop all alarms.
+     * Click on the clock.
+     * @param e
+     */
     private void watchPanelMouseClicked(MouseEvent e)
     {
         alarms.stopAllAlarms();

@@ -8,14 +8,36 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+/**
+ * @author Frolov Daniil IVT-43BO.
+ * Display area directly watch.
+ */
 public class WatchPanel extends JPanel
 {
+    /**
+     * Text color
+     */
     private Color textColor = Color.WHITE;
+    /**
+     * Hour hand color
+     */
     private Color hourHandColor = Color.WHITE;
+    /**
+     * Minute hand color
+     */
     private Color minuteHandColor = Color.WHITE;
+    /**
+     * Second hand color
+     */
     private Color secondHandColor = Color.WHITE;
+    /**
+     * Border of hand color
+     */
     private Color borderHandColor = Color.BLACK;
 
+    /**
+     * Text font
+     */
     private Font textFont = new Font( "Starcraft", Font.ITALIC, 36 );
 
     private Graphics graphContext;
@@ -26,40 +48,68 @@ public class WatchPanel extends JPanel
     private final int gradeInSegmentHour = 30;
     private final double gradeInSegmentMilliSecond = 6./1000;
 
+    /**
+     * Initializes the class.
+     */
     public WatchPanel()
     {
         initComponents();
     }
 
+    /**
+     * Set hour hand color.
+     * @param hourHandColor Color for hour hand. if == null => no changes
+     */
     public void setHourHandColor( Color hourHandColor )
     {
         if(hourHandColor == null) return;
         this.hourHandColor = hourHandColor;
     }
 
+    /**
+     * Set minute hand color.
+     * @param minuteHandColor Color for minute hand. if == null => no changes
+     */
     public void setMinuteHandColor( Color minuteHandColor )
     {
         if(minuteHandColor == null) return;
         this.minuteHandColor = minuteHandColor;
     }
 
+    /**
+     * Set second hand color.
+     * @param secondHandColor Color for second hand. if == null => no changes
+     */
     public void setSecondHandColor( Color secondHandColor )
     {
         if(secondHandColor == null) return;
         this.secondHandColor = secondHandColor;
     }
 
+    /**
+     * Set text color.
+     * @param textColor Color for text. if == null => no changes
+     */
     public void setTextColor( Color textColor )
     {
         if(textColor == null) return;
         this.textColor = textColor;
     }
 
+    /**
+     * Getter for text font.
+     * @return current text font
+     */
     public Font getTextFont()
     {
         return textFont;
     }
 
+    /**
+     * Set text font.
+     * Redraw numbers.
+     * @param textFont font for text. if == null => no changes
+     */
     public void setTextFont( Font textFont )
     {
         if(textFont == null) return;
@@ -68,38 +118,65 @@ public class WatchPanel extends JPanel
         redrawDial( textColor );
     }
 
+    /**
+     * Getter for hour hand color.
+     * @return current hour hand color
+     */
     public Color getHourHandColor()
     {
         return hourHandColor;
     }
 
+    /**
+     * Getter for minute hand color.
+     * @return current minute hand color
+     */
     public Color getMinuteHandColor()
     {
         return minuteHandColor;
     }
 
+    /**
+     * Getter for second hand color.
+     * @return current second hand color
+     */
     public Color getSecondHandColor()
     {
         return secondHandColor;
     }
 
+    /**
+     * Getter for text color.
+     * @return current text color
+     */
     public Color getTextColor()
     {
         return textColor;
     }
 
+    /**
+     * Translate coordinates.
+     */
     public void setGraphContext()
     {
         graphContext = this.getGraphics();
         graphContext.translate( this.getSize().width / 2, this.getSize().height / 2 );
     }
 
+    /**
+     * Redraw watch (hand and dial).
+     * @param curTime current system time
+     */
     public void redrawWatch(Time curTime)
     {
         redrawHands( curTime );
         redrawDial( textColor );
     }
 
+    /**
+     * Redraw hands.
+     * @param curTime current system time
+     */
     private void redrawHands(Time curTime)
     {
         graphContext.setColor( getBackground() );
@@ -114,6 +191,15 @@ public class WatchPanel extends JPanel
                 30, 180, 25, secondHandColor, borderHandColor );
     }
 
+    /**
+     * Draw one hand.
+     * @param grade degree of deviation from the vertical
+     * @param bottomHand smaller diagonal of the quadrilateral
+     * @param heightUpHand length from the center to the vertex distance
+     * @param heightDownHand length from near the center to the vertices
+     * @param inside inside color
+     * @param border border color
+     */
     private void drawHand(double grade, int bottomHand, int heightUpHand, int heightDownHand,
                           Color inside, Color border)
     {
@@ -143,6 +229,10 @@ public class WatchPanel extends JPanel
         graphContext.drawPolygon( new int[]{x1, x2, x3, x4}, new int[]{y1, y2, y3, y4}, 4 );
     }
 
+    /**
+     * Redraw dial.
+     * @param color number color
+     */
     private void redrawDial(Color color)
     {
         double radian;
@@ -153,15 +243,6 @@ public class WatchPanel extends JPanel
 
         graphContext.setColor( color );
         graphContext.setFont( textFont );
-
-        /*for( int i = 1; i <= 12; i++ )
-        {
-            radian = ( -90 + gradeInSegmentHour * i ) * pi/180;
-            x = (int)(Math.cos( radian ) * 230) - 15;
-            y = (int)(Math.sin( radian ) * 230) + 10;
-
-            graphContext.drawString( Integer.toString( i ), x, y);
-        }*/
 
         for( int i = 1; i <= 60 ; i++ )
         {
